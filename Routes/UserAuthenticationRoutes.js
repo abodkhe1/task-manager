@@ -30,13 +30,11 @@ UserRouter.post('/signup', async (req, res) => {
 });
 
 // GET Login Form
+
 UserRouter.get('/login', (req, res) => {
-  // Check for signup success message
-  const signupSuccess = req.session.signupSuccess || false;
-  // Clear the signup success message after displaying
-  req.session.signupSuccess = false;
-  res.render('login', { error: '', signupSuccess });
+  res.render('login', { error: '' }); // Pass 'error' as an empty string by default
 });
+
 
 // POST Login
 UserRouter.post('/login', async (req, res) => {
@@ -52,13 +50,14 @@ UserRouter.post('/login', async (req, res) => {
       return res.redirect('/first-enter'); // Redirect to first entry page after successful login
     } else {
       // Invalid login credentials
-      return res.render('login', { error: 'Username or password does not match.', signupSuccess: false });
+      return res.render('login', { error: 'Username or password does not match.' }); // Pass error message
     }
   } catch (error) {
     console.error('Error during login process:', error);
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 // POST Logout
 UserRouter.post('/logout', (req, res) => {
