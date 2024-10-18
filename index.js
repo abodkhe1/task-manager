@@ -31,7 +31,8 @@ app.use(session({
 
 // Routes
 app.get('/', (req, res) => {
-    res.redirect('/login');  // This will render views/index.ejs
+   // res.redirect('/login');  // This will render views/index.ejs
+ res.render('index'); 
   });
 
 // user routes
