@@ -21,7 +21,7 @@ UserRouter.post('/signup', async (req, res) => {
     await user.save();
 
     // Redirect to login with success message
-    res.redirect('/login-success');
+    res.redirect('/login');
   } catch (error) {
     console.error('Error during signup:', error);
     res.status(500).send('Internal Server Error');
@@ -30,13 +30,13 @@ UserRouter.post('/signup', async (req, res) => {
 
 // GET Login Form with success message after signup
 UserRouter.get('/login-success', (req, res) => {
-  res.render('login', { error: '', signup: true }); // Render login page with signup success message
+  res.render('login'); // Render login page with signup success message
 });
 
 // GET Login Form
 UserRouter.get('/login', (req, res) => {
     // Pass the 'signup' variable to the view, defaulting to null or false if not present
-    res.render('login', { signup: req.query.signup || false });
+    res.render('login');
 });
 
 // POST Login
