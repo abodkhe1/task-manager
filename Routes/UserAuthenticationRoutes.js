@@ -35,7 +35,8 @@ UserRouter.get('/login-success', (req, res) => {
 
 // GET Login Form
 UserRouter.get('/login', (req, res) => {
-  res.render('login', { error: '', signup: '' }); // Render login form without any messages
+    // Pass the 'signup' variable to the view, defaulting to null or false if not present
+    res.render('login', { signup: req.query.signup || false });
 });
 
 // POST Login
