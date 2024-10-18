@@ -1,25 +1,25 @@
 const User = require('../models/User');
 const express = require('express');
-const UserRouter = express.Router();
 const bcrypt = require('bcryptjs');
+const UserRouter = express.Router();
 
 // GET Signup Form
 UserRouter.get('/signup', (req, res) => {
-  res.render('signup');
+  res.render('signup'); // render signup page
 });
 
 // POST Signup
 UserRouter.post('/signup', async (req, res) => {
   try {
     const { username, password } = req.body;
-    
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+
     // Create and save user
     const user = new User({ username, password: hashedPassword });
     await user.save();
-    
+
     // Redirect to login with success message
     res.redirect('/login-success');
   } catch (error) {
@@ -30,13 +30,12 @@ UserRouter.post('/signup', async (req, res) => {
 
 // GET Login Form with success message after signup
 UserRouter.get('/login-success', (req, res) => {
- // res.render('login', { error: '', signup: 'success' });
- res.render('login', { error: '', signup: true }); // Set to true or false based on your logic
+  res.render('login', { error: '', signup: true }); // Render login page with signup success message
 });
 
 // GET Login Form
 UserRouter.get('/login', (req, res) => {
-  res.render('login', { error: '', signup: '' });
+  res.render('login', { error: '', signup: '' }); // Render login form without any messages
 });
 
 // POST Login
@@ -49,8 +48,8 @@ UserRouter.post('/login', async (req, res) => {
 
     // Check if user exists and compare password
     if (user && await bcrypt.compare(password, user.password)) {
-      req.session.userId = user._id;
-      return res.redirect('/first-enter');
+      req.session.userId = user._id; // Store user ID in session
+      return res.redirect('/first-enter'); // Redirect to first entry page after successful login
     } else {
       // Invalid login credentials
       console.error('Invalid login credentials.');
@@ -69,7 +68,7 @@ UserRouter.post('/logout', (req, res) => {
       console.error('Error during logout:', err);
       return res.status(500).send('Internal Server Error');
     }
-    res.redirect('/login');
+    res.redirect('/login'); // Redirect to login page after logout
   });
 });
 
