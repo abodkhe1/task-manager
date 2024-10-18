@@ -30,7 +30,8 @@ UserRouter.post('/signup', async (req, res) => {
 
 // GET Login Form with success message after signup
 UserRouter.get('/login-success', (req, res) => {
-  res.render('login', { error: '', signup: 'success' });
+ // res.render('login', { error: '', signup: 'success' });
+ res.render('login', { error: '', signup: true }); // Set to true or false based on your logic
 });
 
 // GET Login Form
