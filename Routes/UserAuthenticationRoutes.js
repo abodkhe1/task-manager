@@ -20,7 +20,8 @@ UserRouter.post('/signup', async (req, res) => {
     const user = new User({ username, password: hashedPassword });
     await user.save();
 
-    // Redirect to login with success message
+    // Redirect to login page with a success message
+    req.session.signupSuccess = true;
     res.redirect('/login');
   } catch (error) {
     console.error('Error during signup:', error);
@@ -28,15 +29,13 @@ UserRouter.post('/signup', async (req, res) => {
   }
 });
 
-// GET Login Form with success message after signup
-UserRouter.get('/login-success', (req, res) => {
-  res.render('login'); // Render login page with signup success message
-});
-
 // GET Login Form
 UserRouter.get('/login', (req, res) => {
-    // Pass the 'signup' variable to the view, defaulting to null or false if not present
-    res.render('login', { error: '' });
+  // Check for signup success message
+  const signupSuccess = req.session.signupSuccess || false;
+  // Clear the signup success message after displaying
+  req.session.signupSuccess = false;
+  res.render('login', { error: '', signupSuccess });
 });
 
 // POST Login
@@ -53,8 +52,7 @@ UserRouter.post('/login', async (req, res) => {
       return res.redirect('/first-enter'); // Redirect to first entry page after successful login
     } else {
       // Invalid login credentials
-      console.error('Invalid login credentials.');
-      return res.render('login', { error: 'Username or password does not match.', signup: '' });
+      return res.render('login', { error: 'Username or password does not match.', signupSuccess: false });
     }
   } catch (error) {
     console.error('Error during login process:', error);
