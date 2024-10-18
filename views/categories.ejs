@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proveway | Task Manager App</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+  <%- include('nav') %>
+  <div class="container mt-5 d-flex justify-content-center">
+    <div class="card bg-dark text-light p-4 shadow-lg" style="width: 30rem;">
+      <div class="row">
+        <!-- Add New Category Section -->
+        <div class="col-md-12 mb-4">
+          <h1 class="text-center mb-4">Add New Category</h1>
+          <form action="/categories" method="POST" class="mb-4">
+            <div class="input-group">
+              <input type="text" class="form-control bg-secondary text-light" name="name" placeholder="New category" required>
+              <button type="submit" class="btn btn-primary">Add Category</button>
+            </div>
+          </form>
+        </div>
+  
+        <!-- Categories List Section -->
+        <div class="col-md-12">
+          <h1 class="text-center mb-4">Categories List</h1>
+          <ul class="list-group">
+            <% categories.forEach(category => { %>
+                <li class="list-group-item bg-secondary text-light d-flex justify-content-between align-items-center">
+                    <span><%= category.name %></span>
+                    <form action="/categories/<%= category._id %>?_method=DELETE" method="POST" class="mb-0">
+                      <button type="submit" class="btn btn-danger btn-sm">
+                        Delete
+                      </button>
+                    </form>
+                  </li>
+                  
+
+              
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="text-center mt-4">
+        <a href="/tasks" class="btn btn-outline-light">Back to Tasks</a>
+      </div>
+    </div>
+  </div>
+  
+  
+      <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+</body>
+</html>

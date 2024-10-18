@@ -1,0 +1,8 @@
+FlyPKnR5DkwRsdqA
+ajitbodkhe2017
+
+mongodb+srv://ajitbodkhe2017:<db_password>@taskmanager.xsgn3.mongodb.net/
+
+mongodb+srv://<username>:<password>@cluster0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+mongodb+srv://ajitbodkhe2017:<db_password>@taskmanager.xsgn3.mongodb.net/?retryWrites=true&w=majority&appName=taskManager
