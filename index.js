@@ -23,7 +23,9 @@ app.use(session({
   secret: 'PROVEWAY',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb+srv://ajitbodkhe2017:FlyPKnR5DkwRsdqA@taskmanager.xsgn3.mongodb.net/?retryWrites=true&w=majority&appName=taskManager' })
 }));
+
 
 
 
