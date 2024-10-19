@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://ajitbodkhe2017:FlyPKnR5DkwRsdqA@taskmanager.xsgn3.mongodb.net/taskManager', {
+mongoose.connect('mongodb+srv://ajitbodkhe2017:JY77QtyZSzx5uVMm@taskmanager.xsgn3.mongodb.net/taskManager', {
   serverSelectionTimeoutMS: 10000, // Increase server selection timeout
   connectTimeoutMS: 15000,         // Increase connection timeout
   socketTimeoutMS: 60000           // Increase socket timeout
